@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transaksi - DakraMart</title>
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <span class="navbar-brand">DakraMart</span>
+      <div class="ms-auto d-flex align-items-center text-white">
+        <span class="me-3">Kasir: <strong>Nama Kasir</strong></span>
+        <a href="logout.php" class="btn btn-outline-light btn-sm">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container my-4">
+    <h4 class="mb-4">Transaksi Penjualan</h4>
+
+    <div class="row">
+      <!-- Kolom Kiri (8) -->
+      <div class="col-md-8">
+
+        <!-- Form Input Barang -->
+        <form class="row g-3 mb-4" action="#" method="POST">
+          <div class="col-md-6">
+            <label for="barang" class="form-label">Pilih Barang</label>
+            <select class="form-select" id="barang" name="barang" required>
+              <option selected disabled>Pilih barang...</option>
+              <option value="1">Pensil</option>
+              <option value="2">Buku Tulis</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="jumlah" class="form-label">Jumlah</label>
+            <input type="number" class="form-control" id="jumlah" name="jumlah" min="1" required>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-success w-100">Tambah</button>
+          </div>
+        </form>
+
+        <!-- Tabel Keranjang -->
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered table-striped">
+            <thead class="table-primary text-center">
+              <tr>
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Subtotal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">1</td>
+                <td>Pensil</td>
+                <td>Rp 2.000</td>
+                <td class="text-center">2</td>
+                <td>Rp 4.000</td>
+                <td class="text-center">
+                  <button class="btn btn-danger btn-sm">Hapus</button>
+                </td>
+              </tr>
+              <!-- Baris lain diisi dengan data dari session/database -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Kolom Kanan (4) -->
+      <div class="col-md-4">
+        <div class="card p-4 shadow-sm">
+          <h5 class="mb-3">Ringkasan Pembayaran</h5>
+
+          <div class="mb-3">
+            <label class="form-label">Total Belanja</label>
+            <input type="text" class="form-control text-end" value="Rp 4.000" readonly>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Uang Dibayar</label>
+            <input type="number" class="form-control text-end" name="dibayar" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Kembalian</label>
+            <input type="text" class="form-control text-end" value="Rp 0" readonly>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success">Hitung Kembalian</button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn " disabled>Simpan Transaksi</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="assets/bootstrap.bundle.min.js"></script>
+</body>
+</html>
