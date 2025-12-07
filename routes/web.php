@@ -29,12 +29,21 @@ Route::resource('Login', LoginController::class);
 Route::middleware('auth')->group(function () {
 
     // Resource routes untuk fitur utama
+    // Route::resource('kasir', KasirController::class);
+    // Route::resource('barang', BarangController::class);
+
+    // // Kasir custom routes
+    // Route::post('/kasir/add-to-cart', [KasirController::class, 'addToCart'])->name('kasir.add');
+    // Route::post('/kasir/store', [KasirController::class, 'store'])->name('kasir.store');
+    // Route::get('/kasir/cetak/{id}', [KasirController::class, 'cetak'])->name('kasir.cetak');
+    // Route::delete('/kasir/hapus/{index}', [KasirController::class, 'hapusItem'])->name('kasir.hapus');
+
+    // Resource routes untuk fitur utama
     Route::resource('kasir', KasirController::class);
     Route::resource('barang', BarangController::class);
 
     // Kasir custom routes
     Route::post('/kasir/add-to-cart', [KasirController::class, 'addToCart'])->name('kasir.add');
-    Route::post('/kasir/store', [KasirController::class, 'store'])->name('kasir.store');
     Route::get('/kasir/cetak/{id}', [KasirController::class, 'cetak'])->name('kasir.cetak');
     Route::delete('/kasir/hapus/{index}', [KasirController::class, 'hapusItem'])->name('kasir.hapus');
 
@@ -43,6 +52,6 @@ Route::middleware('auth')->group(function () {
 
     // Route Riwayat Transaksi
     Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
-    
+
     Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
 });
