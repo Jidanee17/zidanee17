@@ -4,18 +4,31 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+
+// 1. Rute Publik (Bisa diakses tanpa login)
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
-// Login route tetap terbuka
+Route::get('/about-us', function () {
+    return view('about-us');
+})->name('about.us');
+
+// Resource Login (Sebaiknya gunakan huruf kecil untuk URL: 'login')
 Route::resource('Login', LoginController::class);
 
-// Route yang membutuhkan login
+// 2. Rute Private (Harus Login terlebih dahulu)
 Route::middleware('auth')->group(function () {
-    // Resource routes
+
+    // Resource routes untuk fitur utama
     Route::resource('kasir', KasirController::class);
     Route::resource('barang', BarangController::class);
 
@@ -27,4 +40,9 @@ Route::middleware('auth')->group(function () {
 
     // Laporan custom route
     Route::get('/laporan/cetak/{id}', [LaporanController::class, 'cetak'])->name('laporan.cetak');
+
+    // Route Riwayat Transaksi
+    Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    
+    Route::get('/logout', [LoginController::class, 'logout'])->name('login.logout');
 });

@@ -12,7 +12,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        return view('index');
     }
 
     /**
@@ -20,8 +20,25 @@ class LoginController extends Controller
      */
     public function create()
     {
+        // Auth::logout();
+        // return view('index');
+
+        // request()->session()->invalidate();
+        // request()->session()->regenerateToken();
+
+        // // 3. Arahkan kembali ke halaman Welcome (Root URL '/')
+        // // Menggunakan redirect lebih baik daripada 'return view' agar URL di browser kembali ke awal
+        // return redirect('/');
+    }
+
+    public function logout(Request $request)
+    {
         Auth::logout();
-        return view('index');
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     /**
@@ -34,13 +51,14 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(Auth::attempt($cek)){
+        if (Auth::attempt($cek)) {
             $request->session()->regenerate();
             return redirect()->route('kasir.index');
         }
-        return redirect()->back();
+        return back()->withErrors([
+            'password' => 'Username atau password salah.',
+        ])->withInput();
     }
-
     /**
      * Display the specified resource.
      */
